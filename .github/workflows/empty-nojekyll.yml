@@ -1,0 +1,17 @@
+name: Empty nojekyll
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  empty:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git config user.name "javassss01"
+          git config user.email "javassss01@users.noreply.github.com"
+          truncate -s 0 .nojekyll
+          git add .nojekyll
+          git diff --cached --quiet || git commit -m "Make .nojekyll truly empty"
+          git push
